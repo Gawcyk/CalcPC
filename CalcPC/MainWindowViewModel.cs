@@ -1,36 +1,37 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using System.Globalization;
+
+using CommunityToolkit.Mvvm.ComponentModel;
+
+using MaterialDesignThemes.Wpf;
 
 namespace CalcPC;
 
 public partial class MainWindowViewModel : ObservableObject
 {
-    //This is using the source generators from CommunityToolkit.Mvvm to generate a RelayCommand
-    //See: https://learn.microsoft.com/dotnet/communitytoolkit/mvvm/generators/observableproperty
-    //and: https://learn.microsoft.com/windows/communitytoolkit/mvvm/observableobject
+
     [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(IncrementCountCommand))]
-    private int _count;
-    
+    private BaseTheme _theme;
+
+    [ObservableProperty]
+    private List<CultureInfo> _availableCultures = new();
+
+    [ObservableProperty]
+    private CultureInfo _selectedLang = CultureInfo.CurrentCulture;
+
+
+    partial void OnThemeChanged(BaseTheme value)
+    {
+        PaletteHelper paletteHelper = new();
+        Theme theme = paletteHelper.GetTheme();
+        theme.SetBaseTheme(value);
+        paletteHelper.SetTheme(theme);
+    }
+
+    static BaseTheme SetThemeProperty() => new PaletteHelper().GetTheme().GetBaseTheme();
+
     public MainWindowViewModel()
     {
-        
+        _theme = SetThemeProperty();
     }
 
-    //This is using the source generators from CommunityToolkit.Mvvm to generate a RelayCommand
-    //See: https://learn.microsoft.com/dotnet/communitytoolkit/mvvm/generators/relaycommand
-    //and: https://learn.microsoft.com/windows/communitytoolkit/mvvm/relaycommand
-    [RelayCommand(CanExecute = nameof(CanIncrementCount))]
-    private void IncrementCount()
-    {
-        Count++;
-    }
-
-    private bool CanIncrementCount() => Count < 5;
-
-    [RelayCommand]
-    private void ClearCount()
-    {
-        Count = 0;
-    }
 }

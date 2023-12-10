@@ -5,59 +5,43 @@ namespace CalcPC.Tests;
 [ConstructorTests(typeof(MainWindowViewModel))]
 public partial class MainWindowViewModelTests
 {
-    [Fact]
-    public void IncrementCounterCommand_Execute_IncrementsCount()
-    {
-        //Arrange
-        AutoMocker mocker = new();
 
-        MainWindowViewModel viewModel = mocker.CreateInstance<MainWindowViewModel>();
+    //[Theory]
+    //[InlineData(1, true)]
+    //[InlineData(2, true)]
+    //[InlineData(3, true)]
+    //[InlineData(4, true)]
+    //[InlineData(5, false)]
+    //[InlineData(6, false)]
+    //public void IncrementCounterCommand_CanExecute_IndicatesIfCountIsLessThanFive(int count, bool expected)
+    //{
+    //    //Arrange
+    //    AutoMocker mocker = new();
 
-        int initialCount = viewModel.Count;
+    //    MainWindowViewModel viewModel = mocker.CreateInstance<MainWindowViewModel>();
 
-        //Act
-        viewModel.IncrementCountCommand.Execute(null);
+    //    viewModel.Count = count;
 
-        //Assert
-        Assert.Equal(initialCount + 1, viewModel.Count);
-    }
+    //    //Act
+    //    bool canExecute = viewModel.IncrementCountCommand.CanExecute(null);
 
-    [Theory]
-    [InlineData(1, true)]
-    [InlineData(2, true)]
-    [InlineData(3, true)]
-    [InlineData(4, true)]
-    [InlineData(5, false)]
-    [InlineData(6, false)]
-    public void IncrementCounterCommand_CanExecute_IndicatesIfCountIsLessThanFive(int count, bool expected)
-    {
-        //Arrange
-        AutoMocker mocker = new();
+    //    //Assert
+    //    Assert.Equal(expected, canExecute);
+    //}
 
-        MainWindowViewModel viewModel = mocker.CreateInstance<MainWindowViewModel>();
+    //[Fact]
+    //public void ClearCounterCommand_Execute_ClearsCount()
+    //{
+    //    //Arrange
+    //    AutoMocker mocker = new();
 
-        viewModel.Count = count;
+    //    MainWindowViewModel viewModel = mocker.CreateInstance<MainWindowViewModel>();
+    //    viewModel.Count = 42;
 
-        //Act
-        bool canExecute = viewModel.IncrementCountCommand.CanExecute(null);
+    //    //Act
+    //    viewModel.ClearCountCommand.Execute(null);
 
-        //Assert
-        Assert.Equal(expected, canExecute);
-    }
-
-    [Fact]
-    public void ClearCounterCommand_Execute_ClearsCount()
-    {
-        //Arrange
-        AutoMocker mocker = new();
-
-        MainWindowViewModel viewModel = mocker.CreateInstance<MainWindowViewModel>();
-        viewModel.Count = 42;
-
-        //Act
-        viewModel.ClearCountCommand.Execute(null);
-
-        //Assert
-        Assert.Equal(0, viewModel.Count);
-    }
+    //    //Assert
+    //    Assert.Equal(0, viewModel.Count);
+    //}
 }
