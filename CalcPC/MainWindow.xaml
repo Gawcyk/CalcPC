@@ -7,6 +7,7 @@
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:settings="clr-namespace:CalcPC.Settings"
                  Title="Demo App"
                  Width="800"
                  Height="450"
@@ -64,47 +65,7 @@
                       Style="{StaticResource MaterialDesignIconForegroundButton}">
           <materialDesign:PackIcon Kind="ArrowRightBoldCircleOutline" />
         </ToggleButton>
-        <Grid>
-          <Grid.RowDefinitions>
-            <RowDefinition  Height="auto"/>
-            <RowDefinition />
-            <RowDefinition />
-          </Grid.RowDefinitions>
-          <materialDesign:ColorZone Margin="10"
-                                    Padding="16"
-                                    materialDesign:ElevationAssist.Elevation="Dp3"
-                                    ClipToBounds="False"
-                                    CornerRadius="10"
-                                    Mode="PrimaryLight">
-            <StackPanel>
-              <TextBlock Text="Szata graficzna" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
-              <RadioButton Content="Inherit"
-                           GroupName="Theme"
-                           IsChecked="{Binding Theme, Converter={converters:EnumToBooleanValueConverter EnumType=materialDesign:BaseTheme}, ConverterParameter=Inherit}" />
-              <RadioButton Content="Dark"
-                           GroupName="Theme"
-                           IsChecked="{Binding Theme, Converter={converters:EnumToBooleanValueConverter EnumType=materialDesign:BaseTheme}, ConverterParameter=Dark}" />
-              <RadioButton Content="Light"
-                           GroupName="Theme"
-                           IsChecked="{Binding Theme, Converter={converters:EnumToBooleanValueConverter EnumType=materialDesign:BaseTheme}, ConverterParameter=Light}" />
-            </StackPanel>
-          </materialDesign:ColorZone>
-          <materialDesign:ColorZone Grid.Row="1">
-            <StackPanel>
-              <TextBlock Text="Język"/>
-              <ComboBox
-                        Margin="5"
-                        ItemsSource="{Binding AvailableCultures}"
-                        SelectedValue="{Binding SelectedLang}">
-                <ComboBox.ItemTemplate>
-                  <DataTemplate>
-                    <TextBlock Text="{Binding DisplayName}" />
-                  </DataTemplate>
-                </ComboBox.ItemTemplate>
-              </ComboBox>
-            </StackPanel>
-          </materialDesign:ColorZone>
-        </Grid>
+        <settings:SettingsView/>
       </DockPanel>
     </materialDesign:DrawerHost.RightDrawerContent>
     <Grid>
